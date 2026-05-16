@@ -5,20 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Mappa del Tesoro</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; background-color: #2b2b2b; color: white; padding: 20px; }
-        .mappa-container { margin-top: 20px; }
-        img { max-width: 100%; height: auto; border: 5px solid #8B5A2B; border-radius: 10px; }
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            background-color: #2b2b2b; 
+            color: white; 
+            padding: 20px; 
+        }
+        
+        /* Contenitore della mappa: fondamentale per posizionare la lente */
+        .img-magnifier-container {
+            position: relative;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        img { 
+            max-width: 100%; 
+            height: auto; 
+            border: 5px solid #8B5A2B; 
+            border-radius: 10px; 
+            display: block;
+        }
+
+        /* Lo stile della lente d'ingrandimento */
+        .img-magnifier-glass {
+            position: absolute;
+            border: 3px solid #000;
+            border-radius: 50%;
+            cursor: none;
+            /* Dimensione della lente: puoi modificarla qui */
+            width: 150px;
+            height: 150px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
     </style>
 </head>
 <body>
 
     <h1>🗺️ Hai sbloccato la mappa!</h1>
-    <p>Trova il punto indicato con la croce prima degli altri!</p>
+    <p>Muovi il mouse sulla mappa per usare la lente d'ingrandimento e trovare gli indizi nascosti.</p>
 
-    <div class="mappa-container">
-        <!-- Sostituisci questo con il nome della tua immagine o l'iframe di Google Maps -->
-        <img src="mappa-tesoro.png" alt="Mappa del tesoro con una X">
+    <!-- Contenitore con l'immagine della mappa -->
+    <div class="img-magnifier-container">
+        <!-- Sostituisci "mappa-tesoro.jpg" con il nome reale della tua immagine -->
+        <img id="mappa" src="mappa-tesoro.png" alt="Mappa del tesoro" width="800">
     </div>
+
+    <script>
+        function attivaLente(imgID, zoom) {
+            var img, glass, w, h, bw;
+            img = document.getElementById(imgID);
+
+            /* Crea la lente d'ingrandimento */
+            glass = document.createElement("DIV");
+            glass.setAttribute("class", "img-magnifier-glass");
+
+            /* Inserisce la lente sopra l'immagine */
+            img.parentElement.insertBefore(glass, img);
+
+            /* Imposta le proprietà dello sfondo per la lente */
+            glass.style.backgroundImage = "url('" + img.src + "')";
+            glass.style.backgroundRepeat = "no-repeat";
+            glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
+            bw = 3;
+            w = glass.offsetWidth / 2;
+            h = glass.offsetHeight / 2;
+
+            /* Ascolta i movimenti del mouse (o del dito sui dispositivi mobili) */
+            glass.addEventListener("mousemove", muoviLente);
+            img.addEventListener("mousemove", muoviLente);
+            glass.addEventListener("touchmove", muoviLente);
+            img.addEventListener("touchmove", muoviLente);
+
+            function muoviLente(e) {
+                var pos, x, y;
+                /* Impedisce altri effetti di scorrimento della pagina */
+                e.preventDefault();
+                /* Ottiene le posizioni X e Y del cursore */
+                pos = getCursorPos(e);
+                x = pos.x;
+                y = pos.y;
+                /* Evita che la lente esca dai bordi dell'immagine */
+                if (x > img.width - (w / zoom)) { x = img.width - (w / zoom); }
+                if (x < w / zoom) { x = w / zoom; }
+                if (y > img.height - (h / zoom)) { y = img.height - (h / zoom); }
+                if (y < h / zoom) { y = h / zoom; }
+                /* Imposta la posizione della lente */
+                glass.style.left = (x - w) + "px";
+                glass.style.top = (y - h) + "px";
+                /* Mostra cosa vede la lente con l'effetto zoom */
+                glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
+            }
+
+            function getCursorPos(e) {
+                var a, x = 0, y = 0;
+                e = e || window.event;
+                /* Ottiene le coordinate relative all'immagine */
+                a = img.getBoundingClientRect();
+                x = e.pageX - a.left;
+                y = e.pageY - a.top;
+                /* Considera l'eventuale scorrimento della pagina */
+                x = x - window.pageXOffset;
+                y = y - window.pageYOffset;
+                return { x: x, y: y };
+            }
+        }
+
+        // Avvia la funzione. Il numero 3 indica il livello di zoom (puoi aumentarlo o diminuirlo)
+        // Aspettiamo che l'immagine sia caricata per calcolare le dimensioni corrette
+        window.onload = function() {
+            attivaLente("mappa", 3);
+        };
+    </script>
 
 </body>
 </html>
