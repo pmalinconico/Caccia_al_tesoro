@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caccia al Tesoro - Accesso</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f1ea; padding: 50px; }
+        .box { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block; }
+        input[type="text"] { padding: 10px; width: 200px; border: 1px solid #ccc; border-radius: 5px; }
+        button { padding: 10px 20px; background-color: #8B5A2B; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #6e4420; }
+        .errore { color: red; margin-top: 10px; display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h2>🏴‍☠️ Benvenuto Cacciatore! 🏴‍☠️</h2>
+        <p>Inserisci la parola d'ordine per sbloccare la mappa del tesoro:</p>
+        <input type="text" id="passwordInput" placeholder="Scrivi qui...">
+        <button onclick="verificaPassword()">Sblocca</button>
+        <p id="messaggioErrore" class="errore">Password errata! Ritenta, sarai più fortunato.</p>
+    </div>
+
+    <script>
+        function verificaPassword() {
+            // Sostituisci "CONFIDENZIALE" con la password che desideri
+            const passwordCorretta = "CONFIDENZIALE"; 
+            const input = document.getElementById("passwordInput").value;
+            const errore = document.getElementById("messaggioErrore");
+
+            if (input.trim().toUpperCase() === passwordCorretta.toUpperCase()) {
+                window.location.href = "mappa.html"; // Reindirizza alla pagina della mappa
+            } else {
+                errore.style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>
