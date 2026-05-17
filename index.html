@@ -37,24 +37,24 @@
     <!-- FASE 2: DOMANDA A RISPOSTA MULTIPLA (Inizialmente nascosta) -->
     <div id="faseQuiz" class="box" style="display: none;">
         <h2>🤔 Un ultimo sforzo...</h2>
-        <p>Il Laurieddru ti mette alla prova! Rispondi correttamente al quesito:</p>
-        <h3 style="color: #8B5A2B;">Qual è il capoluogo salentino?</h3>
+        <p>Lu Laurieddru ti mette alla prova! Unisci i puntini dal n. 1 al n. 10 e rispondi correttamente al quesito</p>
+        <h3 style="color: #8B5A2B;">Quale figura geometrica si è formata?</h3>
         
         <div class="opzioni-container">
-            <label class="opzione"><input type="radio" name="capoluogo" value="Bari"> Bari</label>
-            <label class="opzione"><input type="radio" name="capoluogo" value="Lecce"> Lecce</label>
-            <label class="opzione"><input type="radio" name="capoluogo" value="Gallipoli"> Gallipoli</label>
-            <label class="opzione"><input type="radio" name="capoluogo" value="Casarano"> Casarano</label>
+            <label class="opzione"><input type="radio" name="capoluogo" value="retta"> Bari</label>
+            <label class="opzione"><input type="radio" name="capoluogo" value="parabola"> Lecce</label>
+            <label class="opzione"><input type="radio" name="capoluogo" value="circonferenza"> Gallipoli</label>
+            <label class="opzione"><input type="radio" name="capoluogo" value="triangolo"> Casarano</label>
         </div>
         
         <button onclick="verificaQuiz()">Verifica Risposta</button>
-        <p id="messaggioErroreQuiz" class="errore">Risposta errata! Il Laurieddru ride di te, riprova!</p>
+        <p id="messaggioErroreQuiz" class="errore">Risposta errata! 🧙 Lu Laurieddru sta ride, riprova!</p>
     </div>
 
     <script>
         // Funzione per la prima fase (Password)
         function verificaPassword() {
-            const passwordCorretta = "laurieddru"; 
+            const passwordCorretta = "Laurieddru"; 
             const input = document.getElementById("passwordInput").value;
             const errorePass = document.getElementById("messaggioErrorePass");
 
@@ -81,7 +81,7 @@
             }
 
             // Verifica se la risposta è quella corretta
-            if (rispostaSelezionata.value === "Lecce") {
+            if (rispostaSelezionata.value === "parabola") {
                 window.location.href = "mappa.html"; // Reindirizza alla mappa del tesoro
             } else {
                 erroreQuiz.innerText = "Risposta errata! Il Laurieddru ride di te, riprova!";
