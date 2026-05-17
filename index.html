@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caccia al Tesoro - Accesso</title>
+    <title>ITES A. Olivetti - 1^ caccia al Tesoro dell'amicizia - 19 maggio 2026</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f1ea; padding: 50px; }
         .box { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block; }
@@ -17,7 +17,7 @@
 
     <div class="box">
         <h2>🏴‍☠️ Benvenuto Cacciatore! 🏴‍☠️</h2>
-        <p>Inserisci la parola d'ordine per sbloccare la mappa del tesoro:</p>
+        <p>Chi ha nascosto il tesoro? Inserisci il nome di questo personaggio per sbloccare la mappa</p>
         <input type="text" id="passwordInput" placeholder="Scrivi qui...">
         <button onclick="verificaPassword()">Sblocca</button>
         <p id="messaggioErrore" class="errore">Password errata! Ritenta, sarai più fortunato.</p>
@@ -25,8 +25,7 @@
 
     <script>
         function verificaPassword() {
-            // Sostituisci "CONFIDENZIALE" con la password che desideri
-            const passwordCorretta = "CONFIDENZIALE"; 
+            const passwordCorretta = "laurieddru"; 
             const input = document.getElementById("passwordInput").value;
             const errore = document.getElementById("messaggioErrore");
 
