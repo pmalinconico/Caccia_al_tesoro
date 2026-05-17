@@ -6,33 +6,86 @@
     <title>ITES A. Olivetti - 1^ caccia al Tesoro dell'amicizia - 19 maggio 2026</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f1ea; padding: 50px; }
-        .box { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block; }
-        input[type="text"] { padding: 10px; width: 200px; border: 1px solid #ccc; border-radius: 5px; }
-        button { padding: 10px 20px; background-color: #8B5A2B; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        h1 { color: #333; margin-bottom: 30px; }
+        .box { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block; max-width: 450px; width: 100%; }
+        input[type="text"] { padding: 10px; width: 200px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 10px; }
+        button { padding: 10px 20px; background-color: #8B5A2B; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
         button:hover { background-color: #6e4420; }
-        .errore { color: red; margin-top: 10px; display: none; }
+        .errore { color: red; margin-top: 15px; display: none; font-weight: bold; }
+        
+        /* Stili per le risposte multiple */
+        .opzioni-container { text-align: left; margin: 20px 0; }
+        .opzione { margin: 12px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; transition: background 0.2s; }
+        .opzione:hover { background-color: #f0ede5; }
+        .opzione input { margin-right: 10px; cursor: pointer; }
     </style>
 </head>
 <body>
-<h1>ITES A. Olivetti - 1^ caccia al Tesoro dell'amicizia - 19 maggio 2026</h1>
-    <div class="box">
+
+    <h1>ITES A. Olivetti - 1^ caccia al Tesoro dell'amicizia - 19 maggio 2026</h1>
+
+    <!-- FASE 1: INSERIMENTO PERSONAGGIO -->
+    <div id="fasePassword" class="box">
         <h2>🏴‍☠️ Benvenuto Cacciatore! 🏴‍☠️</h2>
-        <p>Chi ha nascosto il tesoro? Inserisci il nome di questo personaggio per sbloccare la mappa</p>
+        <p>Chi ha nascosto il tesoro? Inserisci il nome di questo personaggio per sbloccare la mappa:</p>
         <input type="text" id="passwordInput" placeholder="Scrivi qui...">
+        <br>
         <button onclick="verificaPassword()">Sblocca</button>
-        <p id="messaggioErrore" class="errore">Password errata! Ritenta, sarai più fortunato.</p>
+        <p id="messaggioErrorePass" class="errore">Nome errato! Il personaggio fa i dispetti... Ritenta!</p>
+    </div>
+
+    <!-- FASE 2: DOMANDA A RISPOSTA MULTIPLA (Inizialmente nascosta) -->
+    <div id="faseQuiz" class="box" style="display: none;">
+        <h2>🤔 Un ultimo sforzo...</h2>
+        <p>Il Laurieddru ti mette alla prova! Rispondi correttamente al quesito:</p>
+        <h3 style="color: #8B5A2B;">Qual è il capoluogo salentino?</h3>
+        
+        <div class="opzioni-container">
+            <label class="opzione"><input type="radio" name="capoluogo" value="Bari"> Bari</label>
+            <label class="opzione"><input type="radio" name="capoluogo" value="Lecce"> Lecce</label>
+            <label class="opzione"><input type="radio" name="capoluogo" value="Gallipoli"> Gallipoli</label>
+            <label class="opzione"><input type="radio" name="capoluogo" value="Casarano"> Casarano</label>
+        </div>
+        
+        <button onclick="verificaQuiz()">Verifica Risposta</button>
+        <p id="messaggioErroreQuiz" class="errore">Risposta errata! Il Laurieddru ride di te, riprova!</p>
     </div>
 
     <script>
+        // Funzione per la prima fase (Password)
         function verificaPassword() {
             const passwordCorretta = "laurieddru"; 
             const input = document.getElementById("passwordInput").value;
-            const errore = document.getElementById("messaggioErrore");
+            const errorePass = document.getElementById("messaggioErrorePass");
 
             if (input.trim() === passwordCorretta) {
-                window.location.href = "mappa.html"; // Reindirizza alla pagina della mappa
+                // Nasconde il box della password e mostra il box del quiz
+                document.getElementById("fasePassword").style.display = "none";
+                document.getElementById("faseQuiz").style.display = "inline-block";
             } else {
-                errore.style.display = "block";
+                errorePass.style.display = "block";
+            }
+        }
+
+        // Funzione per la seconda fase (Quiz)
+        function verificaQuiz() {
+            // Recupera l'opzione selezionata dagli studenti
+            const rispostaSelezionata = document.querySelector('input[name="capoluogo"]:checked');
+            const erroreQuiz = document.getElementById("messaggioErroreQuiz");
+
+            // Controlla se è stata selezionata una risposta
+            if (!rispostaSelezionata) {
+                erroreQuiz.innerText = "Devi selezionare una risposta!";
+                erroreQuiz.style.display = "block";
+                return;
+            }
+
+            // Verifica se la risposta è quella corretta
+            if (rispostaSelezionata.value === "Lecce") {
+                window.location.href = "mappa.html"; // Reindirizza alla mappa del tesoro
+            } else {
+                erroreQuiz.innerText = "Risposta errata! Il Laurieddru ride di te, riprova!";
+                erroreQuiz.style.display = "block";
             }
         }
     </script>
