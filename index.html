@@ -52,10 +52,9 @@
         <h3 style="color: #8B5A2B;">Quale figura geometrica si è formata?</h3>
         
 <div class="opzioni-container">
-    <ul>
-        <li><label class="opzione"><input type="radio" name="capoluogo" value="retta"> retta</label></li>
-        <li><label class="opzione"><input type="radio" name="capoluogo" value="parabola"> parabola</label></li>
-        <li><label class="opzione"><input type="radio" name="capoluogo" value="circonferenza"> circonferenza</label></li>
+    <label class="opzione"><input type="radio" name="luogo" value="retta"> retta</label>
+        <label class="opzione"><input type="radio" name="luogo" value="parabola"> parabola</label>
+        <label class="opzione"><input type="radio" name="luogo" value="circonferenza"> circonferenza</label>
     </ul>
 </div>
         
@@ -82,7 +81,7 @@
         // Funzione per la seconda fase (Quiz)
         function verificaQuiz() {
             // Recupera l'opzione selezionata dagli studenti
-            const rispostaSelezionata = document.querySelector('input[name="capoluogo"]:checked');
+            const rispostaSelezionata = document.querySelector('input[name="luogo"]:checked');
             const erroreQuiz = document.getElementById("messaggioErroreQuiz");
 
             // Controlla se è stata selezionata una risposta
