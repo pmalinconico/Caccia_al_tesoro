@@ -40,14 +40,16 @@
         <p>Lu Laurieddru ti mette alla prova! Unisci i puntini dal n. 1 al n. 10 e rispondi correttamente al quesito</p>
         <h3 style="color: #8B5A2B;">Quale figura geometrica si è formata?</h3>
         
-        <div class="opzioni-container">
-            <label class="opzione"><input type="radio" name="capoluogo" value="retta"> retta</label>
-            <label class="opzione"><input type="radio" name="capoluogo" value="parabola"> parabola</label>
-            <label class="opzione"><input type="radio" name="capoluogo" value="circonferenza"> circonferenza</label>
-        </div>
+<div class="opzioni-container">
+    <ul>
+        <li><label class="opzione"><input type="radio" name="capoluogo" value="retta"> retta</label></li>
+        <li><label class="opzione"><input type="radio" name="capoluogo" value="parabola"> parabola</label></li>
+        <li><label class="opzione"><input type="radio" name="capoluogo" value="circonferenza"> circonferenza</label></li>
+    </ul>
+</div>
         
         <button onclick="verificaQuiz()">Verifica Risposta</button>
-        <p id="messaggioErroreQuiz" class="errore">Risposta errata! 🧙 Lu Laurieddru sta ride, riprova!</p>
+        <p id="messaggioErroreQuiz" class="errore">Risposta errata! 🧙 Lu Laurieddru se la ride, riprova!</p>
     </div>
 
     <script>
